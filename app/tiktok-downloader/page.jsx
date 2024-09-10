@@ -1,12 +1,12 @@
-// tiktok-downloader/page.jsx
+// app/tiktok-downloader/page.js
 "use client"; // Ensure this component is client-side
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import SuspenseBoundary from '../components/SuspenseBoundary';
-import Image from "next/image";
+import SuspenseBoundary from '../components/SuspenseBoundary'; // Make sure you have this component
+import Image from 'next/image';
 
-export default function TiktokHandler() {
+export default function TikTokDownloader() {
   const [author, setAuthor] = useState(null);
   const [name, setName] = useState(null);
   const [location, setLocation] = useState(null);
@@ -25,12 +25,11 @@ export default function TiktokHandler() {
         try {
           const decodedUrl = decodeURIComponent(tiktokUrlParam);
           
-          // Pass the full TikTok URL directly to the API
           const tiktokResponse = await fetch(`https://tiktok-scraper7.p.rapidapi.com/?url=${encodeURIComponent(decodedUrl)}&hd=1`, {
             method: 'GET',
             headers: {
-                   'x-rapidapi-key': '684f3639b7msh8a8323ad7a4921bp1c189fjsn00397eeec556',
-                   'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
+              'x-rapidapi-key': 'YOUR_RAPIDAPI_KEY',
+              'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
             }
           });
 
@@ -42,11 +41,9 @@ export default function TiktokHandler() {
           const tiktokResult = await tiktokResponse.json();
           console.log("Profile API Response:", tiktokResult);
 
-          // Check if the data object exists in the response
           if (tiktokResult && tiktokResult.data) {
             const { author, region, music_info, share_count, play, title } = tiktokResult.data;
 
-            // Set values based on API response structure
             if (author && author.avatar) {
               setAvatar(author.avatar);
             }
@@ -72,7 +69,7 @@ export default function TiktokHandler() {
             throw new Error("Unexpected profile API response format or data not found.");
           }
         } catch (error) {
-          setError(error.message); // Set the error message
+          setError(error.message);
           console.error("Fetch error:", error);
         }
       }
@@ -97,7 +94,6 @@ export default function TiktokHandler() {
                   height={150}
                   className="rounded-full border-4 border-purple-500 shadow-lg"
                 />
-
                 {author && (
                   <h1 className="mt-4 text-xl md:text-2xl font-bold text-gray-800">{author}</h1>
                 )}
@@ -121,7 +117,6 @@ export default function TiktokHandler() {
                     </div>
                   </div>
                 )}
-
                 {videoUrl && (
                   <video
                     controls

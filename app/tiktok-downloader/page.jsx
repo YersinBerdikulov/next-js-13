@@ -28,8 +28,8 @@ export default function TikTokDownloader() {
           const tiktokResponse = await fetch(`https://tiktok-scraper7.p.rapidapi.com/?url=${encodeURIComponent(decodedUrl)}&hd=1`, {
             method: 'GET',
             headers: {
-              'x-rapidapi-key': 'YOUR_RAPIDAPI_KEY',
-              'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
+                  'x-rapidapi-key': '684f3639b7msh8a8323ad7a4921bp1c189fjsn00397eeec556',
+                  'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
             }
           });
 

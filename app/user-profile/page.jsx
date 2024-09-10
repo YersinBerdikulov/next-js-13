@@ -31,8 +31,8 @@ export default function UserProfile() {
           const profileResponse = await fetch(`https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${encodeURIComponent(extractedUsername)}`, {
             method: 'GET',
             headers: {
-              'x-rapidapi-key': '1a3a512480msh378d3c082a3a83dp1d9e96jsne320ff037b16',
-              'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com'
+             'x-rapidapi-key': '684f3639b7msh8a8323ad7a4921bp1c189fjsn00397eeec556',
+             'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com'
             }
           });
 
@@ -70,8 +70,8 @@ export default function UserProfile() {
           const storiesResponse = await fetch(`https://instagram-scraper-api2.p.rapidapi.com/v1/stories?username_or_id_or_url=${encodeURIComponent(extractedUsername)}`, {
             method: 'GET',
             headers: {
-              'x-rapidapi-key': '1a3a512480msh378d3c082a3a83dp1d9e96jsne320ff037b16',
-              'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com'
+            'x-rapidapi-key': '684f3639b7msh8a8323ad7a4921bp1c189fjsn00397eeec556',
+           'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com'
             }
           });
 
@@ -142,7 +142,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center">
+    <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center p-4">
       <main className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
 
         {profilePicUrl ? (
@@ -168,15 +168,16 @@ export default function UserProfile() {
               )}
               <h1 className="mt-4 text-center text-gray-950">{is_private ? 'Private Account' : 'Public Account'}</h1>
               {external && (
-                <div className='mt-2 text-center text-blue-300 flex flex-row justify-between'>
+                <div className='mt-2 text-center text-blue-300 flex flex-row items-center space-x-2'>
                   <Image
                     src="/4906292.png"
                     alt="Links image"
                     width={24}
                     height={24}
-                    className=''
                   />
-                  {external}
+                  <a href={external} className="underline" target="_blank" rel="noopener noreferrer">
+                    {external}
+                  </a>
                 </div>
               )}
             </div>
@@ -190,9 +191,7 @@ export default function UserProfile() {
             <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Stories</h2>
             <Swiper
               spaceBetween={30}
-              pagination={{
-                clickable: true,
-              }}
+              pagination={{ clickable: true }}
               navigation={true}
               modules={[Pagination, Navigation]}
               className="mySwiper"

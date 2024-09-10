@@ -27,8 +27,8 @@ export default function TiktokHandler() {
                     const tiktokResponse = await fetch(`https://tiktok-scraper7.p.rapidapi.com/?url=${encodeURIComponent(decodedUrl)}&hd=1`, {
                         method: 'GET',
                         headers: {
-                            'x-rapidapi-key': '1a3a512480msh378d3c082a3a83dp1d9e96jsne320ff037b16',
-                            'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
+                               'x-rapidapi-key': '684f3639b7msh8a8323ad7a4921bp1c189fjsn00397eeec556',
+                               'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
                         }
                     });
     
@@ -80,10 +80,10 @@ export default function TiktokHandler() {
     }, [tiktokUrlParam]);
 
     return (
-        <div className=" bg-gradient-to-br from-[#69C9D0] to-[#EE1D52] min-h-screen flex items-center justify-center">
-            <main className="bg-white mt-7 mb-4     p-10 rounded-lg shadow-lg w-full max-w-2xl">
+        <div className="bg-gradient-to-br from-[#69C9D0] to-[#EE1D52] min-h-screen flex items-center justify-center p-4">
+            <main className="bg-white p-6 md:p-10 rounded-lg shadow-lg w-full max-w-2xl mx-auto">
                 {error ? (
-                    <p className="text-xl text-red-600">{error}</p>
+                    <p className="text-lg md:text-xl text-red-600">{error}</p>
                 ) : (
                     avatar ? (
                         <div className="flex flex-col items-center">
@@ -96,28 +96,28 @@ export default function TiktokHandler() {
                             />
 
                             {author && (
-                                <h1 className="mt-4 text-2xl font-bold text-gray-800">{author}</h1>
+                                <h1 className="mt-4 text-xl md:text-2xl font-bold text-gray-800">{author}</h1>
                             )}
                             {name && (
-                                <p className="mt-2 text-center text-gray-600">{name}</p>
+                                <p className="mt-2 text-center text-base md:text-lg text-gray-600">{name}</p>
                             )}
                             {location && shareCount && (
-                                <div className="mt-4 flex space-x-8 p-4 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition-colors justify-start items-center">
-                                <div className="flex items-center">
-                                <p className="text-2xl font-bold text-gray-800">{location}</p>
+                                <div className="mt-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 p-4 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition-colors">
+                                    <div className="flex items-center">
+                                        <p className="text-lg md:text-2xl font-bold text-gray-800">{location}</p>
+                                    </div>
+                                    <div className="flex items-center space-x-3">
+                                        <Image
+                                            src="/8468899.png"
+                                            alt="Share Icon"
+                                            width={24}
+                                            height={24}
+                                            className="shadow-sm"
+                                        />
+                                        <h1 className="text-base md:text-xl font-semibold text-gray-700">{shareCount} Shares</h1>
+                                    </div>
                                 </div>
-                            <div className="flex items-center space-x-3">
-                            <Image
-                            src="/8468899.png"
-                            alt="Share Icon"
-                            width={24}
-                            height={24}
-                            className="shadow-sm"
-                        />
-                        <h1 className="text-xl font-semibold text-gray-700">{shareCount} Shares</h1>
-                        </div>
-                    </div>
-)}
+                            )}
 
                             {videoUrl && (
                                 <video
@@ -126,7 +126,7 @@ export default function TiktokHandler() {
                                     className="mt-4 w-full rounded-lg shadow-lg"
                                 />
                             )}
-                            <h1 className="mt-4 text-2xl">Music:</h1>
+                            <h1 className="mt-4 text-xl md:text-2xl">Music:</h1>
                             {musicInfo && (
                                 <audio
                                     controls
@@ -138,7 +138,7 @@ export default function TiktokHandler() {
                             )}
                         </div>
                     ) : (
-                        <p className="text-xl text-gray-600">Loading profile picture...</p>
+                        <p className="text-lg md:text-xl text-gray-600">Loading profile picture...</p>
                     )
                 )}
             </main>

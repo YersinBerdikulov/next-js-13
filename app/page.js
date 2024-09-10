@@ -1,7 +1,8 @@
-import Image from 'next/image';
-import Navbar from './components/Navbar';
-import SearchForm from './components/SearchForm';
-import Text from './components/Text';
+import dynamic from 'next/dynamic';
+
+const Navbar = dynamic(() => import('./components/Navbar'), { ssr: false });
+const SearchForm = dynamic(() => import('./components/SearchForm'), { ssr: false });
+const Text = dynamic(() => import('./components/Text'), { ssr: false });
 
 export default function Home() {
   return (

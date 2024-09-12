@@ -15,6 +15,11 @@ export default function TikTokDownloader() {
   const [shareCount, setShareCount] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
   const [error, setError] = useState(null);
+  const [comment,setComment] = useState(null)
+  const [downlaodCount, setDownloadCount] = useState(null)
+  const [playCount, setPlayCount] = useState(null)
+ 
+
 
   const searchParams = useSearchParams();
   const tiktokUrlParam = searchParams.get('video');
@@ -28,8 +33,8 @@ export default function TikTokDownloader() {
           const tiktokResponse = await fetch(`https://tiktok-scraper7.p.rapidapi.com/?url=${encodeURIComponent(decodedUrl)}&hd=1`, {
             method: 'GET',
             headers: {
-                  'x-rapidapi-key': '684f3639b7msh8a8323ad7a4921bp1c189fjsn00397eeec556',
-                  'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
+              'x-rapidapi-key': '684f3639b7msh8a8323ad7a4921bp1c189fjsn00397eeec556',
+                'x-rapidapi-host': 'tiktok-scraper7.p.rapidapi.com'
             }
           });
 
@@ -42,7 +47,7 @@ export default function TikTokDownloader() {
           console.log("Profile API Response:", tiktokResult);
 
           if (tiktokResult && tiktokResult.data) {
-            const { author, region, music_info, share_count, play, title } = tiktokResult.data;
+            const { author, region, music_info, share_count, play, title, play_count,comment_count,download_count,nickname } = tiktokResult.data;
 
             if (author && author.avatar) {
               setAvatar(author.avatar);
@@ -50,6 +55,7 @@ export default function TikTokDownloader() {
             if (play) {
               setVideoUrl(play);
             }
+          
             if (author) {
               setAuthor(author.nickname);
             }
@@ -64,6 +70,15 @@ export default function TikTokDownloader() {
             }
             if (title) {
               setName(title);
+            }
+            if(comment_count){
+                setComment(comment_count)
+            }
+            if(play_count){
+                setPlayCount(play_count)
+            }
+            if(download_count){
+                setDownloadCount(download_count)
             }
           } else {
             throw new Error("Unexpected profile API response format or data not found.");
@@ -100,14 +115,51 @@ export default function TikTokDownloader() {
                 {name && (
                   <p className="mt-2 text-center text-base md:text-lg text-gray-600">{name}</p>
                 )}
-                {location && shareCount && (
+                {location && shareCount && comment && playCount &&  downlaodCount &&(
                   <div className="mt-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 p-4 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition-colors">
-                    <div className="flex items-center">
+                    <div className="flex items-center space-x-1">
+                    <Image
+                        src="/view-512.webp"
+                        alt="Share Icon"
+                        width={44}
+                        height={44}
+                        className=""
+                      />
+                      <p className="text-lg md:text-2xl font-bold text-gray-800">{playCount}</p>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                    <Image
+                        src="/43-512.webp"
+                        alt="Share Icon"
+                        width={34}
+                        height={34}
+                        className=""
+                      />
+                      <p className="text-lg md:text-2xl font-bold text-gray-800">{comment}</p>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                    <Image
+                        src="/download-flat.png"
+                        alt="Share Icon"
+                        width={24}
+                        height={24}
+                        className="shadow-sm"
+                      />
+                      <p className="text-lg md:text-2xl font-bold text-gray-800">{downlaodCount}</p>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                    <Image
+                        src="/green-location-icons-17.png"
+                        alt="Share Icon"
+                        width={24}
+                        height={24}
+                        className="shadow-sm"
+                      />
                       <p className="text-lg md:text-2xl font-bold text-gray-800">{location}</p>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Image
-                        src="/8468899.png"
+                        src="/174-512.webp"
                         alt="Share Icon"
                         width={24}
                         height={24}

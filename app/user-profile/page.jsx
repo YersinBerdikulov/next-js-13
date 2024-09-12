@@ -18,6 +18,11 @@ export default function UserProfile() {
   const searchParams = useSearchParams();
   const [is_private, setIs_private] = useState(null);
   const [external, setExternal] = useState(null);
+  const [country,setCountry] = useState(null)
+  const [join,setJoin] = useState(null)
+  const [followers,setFollowers] = useState(null)
+  const [following,setFolowing] = useState(null)
+
 
   const usernameUrlParam = searchParams.get('username');
 
@@ -45,7 +50,7 @@ export default function UserProfile() {
           console.log("Profile API Response:", profileResult.data.is_private);
 
           if (profileResult && profileResult.data) {
-            const { hd_profile_pic_url_info, username, biography, external_url, is_private } = profileResult.data;
+            const { hd_profile_pic_url_info, username, biography, external_url, is_private,about,follower_count,following_count } = profileResult.data;
 
             if (hd_profile_pic_url_info && hd_profile_pic_url_info.url) {
               setProfilePicUrl(hd_profile_pic_url_info.url);
@@ -54,9 +59,21 @@ export default function UserProfile() {
             if (username) {
               setUsername(username);
             }
+            if(follower_count){
+              setFollowers(follower_count)
+            }
+            if(following_count){
+              setFolowing(following_count)
+            }
 
             if (biography) {
               setBiography(biography);
+            }
+            if(about && about.country){
+              setCountry(about.country)
+            }
+            if(about && about.join){
+              setJoin(about.join)
             }
             if (external_url) {
               setExternal(external_url);
@@ -163,6 +180,20 @@ export default function UserProfile() {
               {username && (
                 <h1 className="mt-4 text-2xl font-bold text-gray-800">{username}</h1>
               )}
+              {followers && (
+                <div className='flex  space-x-3' >
+                
+                <p className="mt-2 flex items-start justify-start text-xl  text-black">Followers: {followers}</p>
+              
+                </div>
+           
+              )}
+              {following && (
+                <div className='flex space-x-3'>
+              
+                <p className="mt-2  text-xl items-end justify-start  text-black "> Following: {following}</p>
+                </div>
+              )}
               {biography && (
                 <p className="mt-2 text-center text-gray-600">{biography}</p>
               )}
@@ -179,6 +210,12 @@ export default function UserProfile() {
                     {external}
                   </a>
                 </div>
+              )}
+              {country && (
+                <p className="mt-2 text-center text-gray-600">{country}</p>
+              )}
+              {join && (
+                <p className="mt-2 text-center text-gray-600">{join}</p>
               )}
             </div>
           </>
